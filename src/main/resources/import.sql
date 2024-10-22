@@ -1,0 +1,15 @@
+INSERT INTO spaceship (spaceship_name, movie_name) VALUES ('Halcón Milenario', 'Star Wars');
+INSERT INTO spaceship (spaceship_name, movie_name) VALUES ('USS Enterprise', 'Star Trek');
+INSERT INTO spaceship (spaceship_name, movie_name) VALUES ('Nave Nodriza', 'District 0');
+INSERT INTO spaceship (spaceship_name, movie_name) VALUES ('Endurance', 'Interstellar');
+INSERT INTO spaceship (spaceship_name, movie_name) VALUES ('Nave Nodriza', 'Encuentros en la tercera fase');
+INSERT INTO spaceship (spaceship_name, movie_name) VALUES ('Platillo Volante', 'Independence Day');
+INSERT INTO spaceship (spaceship_name, movie_name) VALUES ('Discovery One', '2001: Una Odisea del espacio');
+INSERT INTO spaceship (spaceship_name, movie_name) VALUES ('Derelict', 'Alien, Prometheus');
+INSERT INTO spaceship (spaceship_name, movie_name) VALUES ('Event Horizon', 'Event Horizon');
+INSERT INTO spaceship (spaceship_name, movie_name) VALUES ('Serenity', 'Firefly');
+INSERT INTO spaceship (spaceship_name, movie_name) VALUES ('Arcadia', 'Capitán Harlock');
+INSERT INTO spaceship (spaceship_name, movie_name) VALUES ('Battlestar Galáctica', 'Battlestar Galáctica');
+INSERT INTO spaceship (spaceship_name, movie_name) VALUES ('Cohete de Zarkov', 'Flash Gordon');
+INSERT INTO spaceship (spaceship_name, movie_name) VALUES ('Nostromo', 'Alien');
+INSERT INTO spaceship (spaceship_name, movie_name) VALUES ('Planet Express', 'Futurama');
