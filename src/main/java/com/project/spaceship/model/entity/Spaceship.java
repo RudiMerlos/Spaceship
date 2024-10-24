@@ -8,9 +8,13 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Data
+@AllArgsConstructor
+@NoArgsConstructor
 @Entity
 @Table(name = "spaceship")
 public class Spaceship implements Serializable {
@@ -26,5 +30,10 @@ public class Spaceship implements Serializable {
 
 	@Column(name = "movie_name")
 	private String movieName;
+
+	public Spaceship(String spaceshipName, String movieName) {
+		this.spaceshipName = spaceshipName;
+		this.movieName = movieName;
+	}
 
 }

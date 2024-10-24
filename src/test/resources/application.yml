@@ -2,26 +2,18 @@ spring:
   application:
     name: spaceship
   datasource:
-    url: jdbc:h2:mem:spaceship_db
+    url: jdbc:h2:mem:spaceship_db_test
     username: sa
     password: sa
     driver-class-name: org.h2.Driver
   h2:
     console:
       enabled: true
-      path: /h2
+      path: /h2test
   flyway:
     enabled: true
-    locations: classpath:db/migration
+    locations: classpath:db/migration_test
   jpa:
     show-sql: true
     hibernate:
       ddl-auto: none
-  cache:
-    type: caffeine
-    caffeine:
-      spec: maximumSize=100,expireAfterWrite=5m
-
-logging:
-  level:
-    '[com.project]': warn
