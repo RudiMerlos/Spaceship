@@ -9,9 +9,9 @@ import org.springframework.stereotype.Component;
 @Aspect
 @Component
 public class LogginAspect {
-	
+
 	private static final Logger log = LoggerFactory.getLogger(LogginAspect.class);
-	
+
 	@Before("execution(* com.project.spaceship.service.SpaceshipService.findById(Long)) && args(id)")
 	public void logNegativeId(Long id) {
 		if (id < 0) {

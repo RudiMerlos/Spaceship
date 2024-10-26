@@ -17,4 +17,10 @@ public class SpaceshipDto extends BaseDto {
 
 	private String movieName;
 
+	public SpaceshipDto(Long id, String spaceshipName, String movieName) {
+		this.id = id;
+		this.spaceshipName = spaceshipName;
+		this.movieName = movieName;
+	}
+
 }

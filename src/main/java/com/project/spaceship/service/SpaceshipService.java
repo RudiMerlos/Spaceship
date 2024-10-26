@@ -15,7 +15,7 @@ import com.project.spaceship.model.repository.SpaceshipRepository;
 public class SpaceshipService {
 
 	private final SpaceshipRepository spaceshipRepository;
-	
+
 	private final SpaceshipMapper spaceshipMapper;
 
 	public SpaceshipService(SpaceshipRepository spaceshipRepository, SpaceshipMapper spaceshipMapper) {
@@ -40,7 +40,8 @@ public class SpaceshipService {
 
 	@Transactional
 	public SpaceshipDto save(SpaceshipDto newSpaceship) {
-		return this.spaceshipMapper.entityToDto(this.spaceshipRepository.saveAndFlush(this.spaceshipMapper.dtoToEntity(newSpaceship)));
+		return this.spaceshipMapper
+				.entityToDto(this.spaceshipRepository.saveAndFlush(this.spaceshipMapper.dtoToEntity(newSpaceship)));
 	}
 
 	@Transactional
