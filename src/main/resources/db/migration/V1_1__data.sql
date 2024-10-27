@@ -1,6 +1,6 @@
 INSERT INTO spaceship (spaceship_name, movie_name) VALUES ('Halcón Milenario', 'Star Wars');
 INSERT INTO spaceship (spaceship_name, movie_name) VALUES ('USS Enterprise', 'Star Trek');
-INSERT INTO spaceship (spaceship_name, movie_name) VALUES ('Nave Nodriza', 'District 0');
+INSERT INTO spaceship (spaceship_name, movie_name) VALUES ('Nave Nodriza', 'District 9');
 INSERT INTO spaceship (spaceship_name, movie_name) VALUES ('Endurance', 'Interstellar');
 INSERT INTO spaceship (spaceship_name, movie_name) VALUES ('Nave Nodriza', 'Encuentros en la tercera fase');
 INSERT INTO spaceship (spaceship_name, movie_name) VALUES ('Platillo Volante', 'Independence Day');

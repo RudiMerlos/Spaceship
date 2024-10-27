@@ -18,3 +18,4 @@ de datos H2 en memoria.
 - Utilizar alguna librería que facilite el mantenimiento de los scripts DDL de base de datos (flyway).
 - Seguridad de la API.
 - Documentación de la API (swagger).
+- Test de integración.
