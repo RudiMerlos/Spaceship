@@ -43,17 +43,17 @@ public class SpaceshipServiceTest {
 
 	@BeforeEach
 	public void setUp() {
-		spaceship1 = new Spaceship(1L, "USS Enterprise Test", "Star Trek Test");
-		spaceshipDto1 = new SpaceshipDto(1L, "USS Enterprise Test", "Star Trek Test");
-		spaceship2 = new Spaceship(2L, "Halcón Milenario Test", "Star Wars Test");
-		spaceshipDto2 = new SpaceshipDto(2L, "Halcón Milenario Test", "Star Wars Test");
+		this.spaceship1 = new Spaceship(1L, "USS Enterprise Test", "Star Trek Test");
+		this.spaceshipDto1 = new SpaceshipDto(1L, "USS Enterprise Test", "Star Trek Test");
+		this.spaceship2 = new Spaceship(2L, "Halcón Milenario Test", "Star Wars Test");
+		this.spaceshipDto2 = new SpaceshipDto(2L, "Halcón Milenario Test", "Star Wars Test");
 	}
 
 	@Test
 	public void testFindAll() {
-		Page<Spaceship> spaceshipPage = new PageImpl<>(List.of(spaceship1, spaceship2));
+		Page<Spaceship> spaceshipPage = new PageImpl<>(List.of(this.spaceship1, this.spaceship2));
 		when(this.spaceshipRepository.findAll(PageRequest.of(0, 10))).thenReturn(spaceshipPage);
-		when(this.spaceshipMapper.entityToDto(spaceshipPage)).thenReturn(List.of(spaceshipDto1, spaceshipDto2));
+		when(this.spaceshipMapper.entityToDto(spaceshipPage)).thenReturn(List.of(this.spaceshipDto1, this.spaceshipDto2));
 
 		List<SpaceshipDto> result = this.spaceshipService.findAll(0, 10);
 
@@ -64,7 +64,7 @@ public class SpaceshipServiceTest {
 	@Test
 	public void testFindByIdSpaceshipExists() {
 		when(this.spaceshipRepository.findById(1L)).thenReturn(Optional.of(this.spaceship1));
-		when(this.spaceshipMapper.entityToDto(this.spaceship1)).thenReturn(spaceshipDto1);
+		when(this.spaceshipMapper.entityToDto(this.spaceship1)).thenReturn(this.spaceshipDto1);
 
 		Optional<SpaceshipDto> result = this.spaceshipService.findById(1L);
 
@@ -83,9 +83,8 @@ public class SpaceshipServiceTest {
 
 	@Test
 	public void testFindBySpaceshipName() {
-		when(this.spaceshipRepository.findBySpaceshipNameContainingIgnoreCase("Enterprise"))
-				.thenReturn(List.of(spaceship1));
-		when(this.spaceshipMapper.entityToDto(List.of(spaceship1))).thenReturn(List.of(spaceshipDto1));
+		when(this.spaceshipRepository.findBySpaceshipNameContainingIgnoreCase("Enterprise")).thenReturn(List.of(this.spaceship1));
+		when(this.spaceshipMapper.entityToDto(List.of(this.spaceship1))).thenReturn(List.of(this.spaceshipDto1));
 
 		List<SpaceshipDto> result = this.spaceshipService.findBySpaceshipName("Enterprise");
 
@@ -94,20 +93,20 @@ public class SpaceshipServiceTest {
 
 	@Test
 	public void testCreateSpaceship() {
-		when(this.spaceshipRepository.saveAndFlush(spaceship1)).thenReturn(spaceship1);
-		when(this.spaceshipRepository.saveAndFlush(spaceship2)).thenReturn(spaceship2);
+		when(this.spaceshipRepository.save(this.spaceship1)).thenReturn(this.spaceship1);
+		when(this.spaceshipRepository.save(this.spaceship2)).thenReturn(this.spaceship2);
 
-		when(this.spaceshipMapper.entityToDto(spaceship1)).thenReturn(spaceshipDto1);
-		when(this.spaceshipMapper.entityToDto(spaceship2)).thenReturn(spaceshipDto2);
+		when(this.spaceshipMapper.entityToDto(this.spaceship1)).thenReturn(this.spaceshipDto1);
+		when(this.spaceshipMapper.entityToDto(this.spaceship2)).thenReturn(this.spaceshipDto2);
 
-		when(this.spaceshipMapper.dtoToEntity(spaceshipDto1)).thenReturn(spaceship1);
-		when(this.spaceshipMapper.dtoToEntity(spaceshipDto2)).thenReturn(spaceship2);
+		when(this.spaceshipMapper.dtoToEntity(this.spaceshipDto1)).thenReturn(this.spaceship1);
+		when(this.spaceshipMapper.dtoToEntity(this.spaceshipDto2)).thenReturn(this.spaceship2);
 
-		SpaceshipDto result1 = this.spaceshipService.save(spaceshipDto1);
-		SpaceshipDto result2 = this.spaceshipService.save(spaceshipDto2);
+		SpaceshipDto result1 = this.spaceshipService.save(this.spaceshipDto1);
+		SpaceshipDto result2 = this.spaceshipService.save(this.spaceshipDto2);
 
-		assertEquals(spaceshipDto1, result1);
-		assertEquals(spaceshipDto2, result2);
+		assertEquals(this.spaceshipDto1, result1);
+		assertEquals(this.spaceshipDto2, result2);
 	}
 
 	@Test

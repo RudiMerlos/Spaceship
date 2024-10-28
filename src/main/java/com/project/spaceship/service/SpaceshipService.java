@@ -40,8 +40,7 @@ public class SpaceshipService {
 
 	@Transactional
 	public SpaceshipDto save(SpaceshipDto newSpaceship) {
-		return this.spaceshipMapper
-				.entityToDto(this.spaceshipRepository.saveAndFlush(this.spaceshipMapper.dtoToEntity(newSpaceship)));
+		return this.spaceshipMapper.entityToDto(this.spaceshipRepository.save(this.spaceshipMapper.dtoToEntity(newSpaceship)));
 	}
 
 	@Transactional

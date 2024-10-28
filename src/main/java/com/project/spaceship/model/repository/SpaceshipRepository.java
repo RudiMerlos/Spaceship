@@ -44,7 +44,7 @@ public interface SpaceshipRepository extends JpaRepository<Spaceship, Long> {
 		@CacheEvict(value = "spaceships", allEntries = true),
 		@CacheEvict(value = "spaceshipsByName", allEntries = true)
 	})
-	<S extends Spaceship> S saveAndFlush(S entity);
+	<S extends Spaceship> S save(S entity);
 
 	@Cacheable(value = "spaceshipsByName", key = "#name")
 	List<Spaceship> findBySpaceshipNameContainingIgnoreCase(String name);
