@@ -1,6 +1,6 @@
 # Spaceship
 
-API Rest desarrollada en Java 21 y SpringBoot 3.3.4 que permite un mantenimiento CRUD de naves espaciales de series y películas en una base
+API Rest desarrollada en Java 21 y SpringBoot 3.3.5 que permite un mantenimiento CRUD de naves espaciales de series y películas en una base
 de datos H2 en memoria.
 
 ### Objetivos desarrollados
@@ -19,3 +19,4 @@ de datos H2 en memoria.
 - Seguridad de la API.
 - Documentación de la API (swagger).
 - Test de integración.
+- Presentar la aplicación dockerizada.
