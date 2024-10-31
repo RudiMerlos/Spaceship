@@ -14,42 +14,42 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.project.spaceship.exception.ItemNotFoundException;
-import com.project.spaceship.model.dto.SpaceshipDto;
+import com.project.spaceship.dto.PageDto;
+import com.project.spaceship.dto.SpaceshipDto;
+import com.project.spaceship.service.SpaceshipQueryService;
 import com.project.spaceship.service.SpaceshipService;
 
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import lombok.RequiredArgsConstructor;
 
 @Tag(name = "Spaceships management", description = "Operations related to spaceship management")
+@RequiredArgsConstructor
 @RestController
 @RequestMapping("/api/spaceships")
 public class SpaceshipController {
 
 	private final SpaceshipService spaceshipService;
 
-	public SpaceshipController(SpaceshipService spaceshipService) {
-		this.spaceshipService = spaceshipService;
-	}
+	private final SpaceshipQueryService spaceshipQueryService;
 
 	@Operation(summary = "Get all spaceships", description = "Returns a list of all spaceships registered in the system")
 	@GetMapping({ "", "/" })
-	public ResponseEntity<List<SpaceshipDto>> getAll(@RequestParam(defaultValue = "0") int page,
+	public ResponseEntity<PageDto<SpaceshipDto>> getAll(@RequestParam(defaultValue = "0") int page,
 			@RequestParam(defaultValue = "10") int size) {
-		return ResponseEntity.ok(this.spaceshipService.findAll(page, size));
+		return ResponseEntity.ok(this.spaceshipQueryService.findAll(page, size));
 	}
 
 	@Operation(summary = "Get a spaceship by ID", description = "Returns a spaceship whose ID matches the provided ID")
 	@GetMapping("/{id}")
 	public ResponseEntity<SpaceshipDto> getById(@PathVariable Long id) {
-		return this.spaceshipService.findById(id).map(spaceship -> ResponseEntity.ok(spaceship))
-				.orElseThrow(() -> new ItemNotFoundException("Spaceship with ID " + id + " is not found in the database."));
+		return ResponseEntity.ok(this.spaceshipQueryService.findById(id));
 	}
 
 	@Operation(summary = "Get a spaceship by name", description = "Returns a spaceship whose name matches the provided name")
 	@GetMapping("/search")
 	public ResponseEntity<List<SpaceshipDto>> searchByName(@RequestParam String name) {
-		return ResponseEntity.ok(this.spaceshipService.findBySpaceshipName(name));
+		return ResponseEntity.ok(this.spaceshipQueryService.findBySpaceshipName(name));
 	}
 
 	@Operation(summary = "Create a new spaceship", description = "Create a new spaceship with the information provided")
@@ -60,21 +60,15 @@ public class SpaceshipController {
 
 	@Operation(summary = "Modify a spaceship", description = "Modify an existing spaceship with the information provided")
 	@PutMapping("/{id}")
-	public ResponseEntity<SpaceshipDto> edit(@PathVariable Long id, @RequestBody SpaceshipDto spaceship) {
-		return this.spaceshipService.findById(id).map(spaceshipDB -> {
-			spaceshipDB.setSpaceshipName(spaceship.getSpaceshipName());
-			spaceshipDB.setMovieName(spaceship.getMovieName());
-			return ResponseEntity.status(HttpStatus.CREATED).body(this.spaceshipService.save(spaceshipDB));
-		}).orElseGet(() -> ResponseEntity.notFound().build());
+	public ResponseEntity<SpaceshipDto> modify(@PathVariable Long id, @RequestBody SpaceshipDto spaceship) {
+		return ResponseEntity.status(HttpStatus.CREATED).body(this.spaceshipService.modify(id, spaceship));
 	}
 
 	@Operation(summary = "Delete a spaceship", description = "Deletes a spaceship whose ID matches the provided ID")
 	@DeleteMapping("/{id}")
 	public ResponseEntity<Object> delete(@PathVariable Long id) {
-		return this.spaceshipService.findById(id).map(spaceship -> {
-			this.spaceshipService.deleteById(id);
-			return ResponseEntity.noContent().build();
-		}).orElseThrow(() -> new ItemNotFoundException("Spaceship with ID " + id + " is not found in the database."));
+		this.spaceshipService.deleteById(id);
+		return ResponseEntity.noContent().build();
 	}
 
 }

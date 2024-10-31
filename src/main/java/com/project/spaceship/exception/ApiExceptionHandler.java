@@ -6,12 +6,17 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.servlet.resource.NoResourceFoundException;
 
+import lombok.RequiredArgsConstructor;
+
+@RequiredArgsConstructor
 @RestControllerAdvice
 public class ApiExceptionHandler {
 
+	private final ExceptionMessage exceptionMessage;
+
 	@ExceptionHandler(NoResourceFoundException.class)
 	public ResponseEntity<String> noResourceFoundExceptionHandler(NoResourceFoundException ex) {
-		return ResponseEntity.badRequest().body("Resource not found: " + ex.getMessage());
+		return ResponseEntity.status(HttpStatus.NOT_FOUND).body(this.exceptionMessage.getMessageResourceNotFound(ex.getMessage()));
 	}
 
 	@ExceptionHandler(ItemNotFoundException.class)

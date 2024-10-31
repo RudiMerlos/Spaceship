@@ -17,7 +17,7 @@ import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.MockMvc;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.project.spaceship.model.dto.SpaceshipDto;
+import com.project.spaceship.dto.SpaceshipDto;
 import com.project.spaceship.service.SpaceshipService;
 
 @SpringBootTest
@@ -48,7 +48,7 @@ public class SpaceshipControllerIntegrationTest {
                 .param("page", "0")
                 .param("size", "10"))
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("$.length()").value(2));
+                .andExpect(jsonPath("$.content.length()").value(2));
         // @formatter:on
     }
 

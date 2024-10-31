@@ -1,8 +1,8 @@
-package com.project.spaceship.model.mapper;
+package com.project.spaceship.mapper;
 
 import java.util.List;
 
-import com.project.spaceship.model.dto.BaseDto;
+import com.project.spaceship.dto.BaseDto;
 import com.project.spaceship.model.entity.BaseEntity;
 
 public interface BaseMapper<T extends BaseEntity, D extends BaseDto> {

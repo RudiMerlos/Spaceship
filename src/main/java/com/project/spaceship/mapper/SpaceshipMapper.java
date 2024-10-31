@@ -1,8 +1,8 @@
-package com.project.spaceship.model.mapper;
+package com.project.spaceship.mapper;
 
 import org.mapstruct.Mapper;
 
-import com.project.spaceship.model.dto.SpaceshipDto;
+import com.project.spaceship.dto.SpaceshipDto;
 import com.project.spaceship.model.entity.Spaceship;
 
 @Mapper(componentModel = "spring")

@@ -1,4 +1,4 @@
-package com.project.spaceship.model.dto;
+package com.project.spaceship.dto;
 
 import java.io.Serializable;
 

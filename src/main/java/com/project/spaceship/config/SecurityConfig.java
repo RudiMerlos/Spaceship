@@ -24,10 +24,10 @@ public class SecurityConfig {
 		// @formatter:off
 		http.csrf(csrf -> csrf.disable())
 			.authorizeHttpRequests(authorizeRequests -> authorizeRequests
-					.requestMatchers(HttpMethod.GET, "/api/spaceships/**").hasAnyRole("USER", "ADMIN")
-					.requestMatchers(HttpMethod.POST, "/api/spaceships/**").hasRole("ADMIN")
-					.requestMatchers(HttpMethod.PUT, "/api/spaceships/**").hasRole("ADMIN")
-					.requestMatchers(HttpMethod.DELETE, "/api/spaceships/**").hasRole("ADMIN")
+					.requestMatchers(HttpMethod.GET, "/api/spaceships/**").hasAnyRole(UserRole.USER.name(), UserRole.ADMIN.name())
+					.requestMatchers(HttpMethod.POST, "/api/spaceships/**").hasRole(UserRole.ADMIN.name())
+					.requestMatchers(HttpMethod.PUT, "/api/spaceships/**").hasRole(UserRole.ADMIN.name())
+					.requestMatchers(HttpMethod.DELETE, "/api/spaceships/**").hasRole(UserRole.ADMIN.name())
 					.anyRequest().authenticated())
 			.httpBasic(withDefaults());
 		// @formatter:on
@@ -36,8 +36,14 @@ public class SecurityConfig {
 
 	@Bean
 	UserDetailsService userDetailService() {
-		UserDetails admin = User.withUsername("admin").password(this.passwordEncoder().encode("admin")).roles("ADMIN").build();
-		UserDetails user = User.withUsername("user").password(this.passwordEncoder().encode("user")).roles("USER").build();
+		// @formatter:off
+		UserDetails admin = User.withUsername("admin")
+				.password(this.passwordEncoder().encode("admin")).roles(UserRole.ADMIN.name())
+				.build();
+		UserDetails user = User.withUsername("user")
+				.password(this.passwordEncoder().encode("user")).roles(UserRole.USER.name())
+				.build();
+		// @formatter:on
 		return new InMemoryUserDetailsManager(admin, user);
 	}
 
